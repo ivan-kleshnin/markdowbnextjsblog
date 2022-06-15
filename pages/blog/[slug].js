@@ -96,8 +96,11 @@ export async function getStaticProps({params}) {
 
   const _x = path.resolve("content3", "blog", slug + ".md")
 
+<<<<<<< HEAD
   const _y = path.resolve("content4")
 
+=======
+>>>>>>> 957faec3aea134b84eb17f0f0d7c7ce35b131436
   return {
     props: {
       post,
