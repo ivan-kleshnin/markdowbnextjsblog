@@ -50,6 +50,9 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
+  console.log("LS process.cwd():", fs.readdirSync(process.cwd()))
+  console.log("LS ./", fs.readdirSync(path.resolve("./")))
+
   // Get files from the posts dir
   const files = await fs.readdirSync(path.resolve("content", "blog"))
 
