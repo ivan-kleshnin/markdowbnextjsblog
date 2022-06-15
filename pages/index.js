@@ -59,7 +59,7 @@ export async function getStaticProps() {
   console.log('files:', files)
 
   // Get slug and frontmatter from posts
-  const tempPosts = files.map((filename) => {
+  const tempPosts = files.map(filename => {
     // Create slug
     const slug = filename.replace('.md', '')
 
@@ -78,27 +78,23 @@ export async function getStaticProps() {
   })
 
   //  remove null in tempPosts
-  const posts = tempPosts.filter(
-    post => {
-      return post && post
-    }
-  )
+  const posts = tempPosts.filter(post => {
+    return post && post
+  })
   const jsonString = JSON.stringify(posts)
   fs.writeFileSync('./search.json', jsonString, err => {
     if (err) {
-        console.log('Error writing file', err)
+      console.log('Error writing file', err)
     } else {
-        console.log('Successfully wrote file')
+      console.log('Successfully wrote file')
     }
-})
+  })
 
   return {
     props: {
       posts: posts.sort(sortByDate),
     },
   }
-
-
 }
 
 

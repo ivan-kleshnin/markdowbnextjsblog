@@ -8,112 +8,107 @@ import { NextSeo } from 'next-seo';
 
 export default function PostPage({ content, frontmatter }) {
   const date = new Date(frontmatter.date)
-  const imageMeta= frontmatter.images.map(
-      image  =>  {
-       const imageUrl =  ImageUrl(image)
-        return {
-        url: imageUrl,
-        width: 1224,
-        height: 724,
-        alt: frontmatter.title,
-        type: 'image/jpeg',
-      }
-     }
-    )
+  const imageMeta= frontmatter.images.map(image => {
+     const imageUrl =  ImageUrl(image)
+      return {
+      url: imageUrl,
+      width: 1224,
+      height: 724,
+      alt: frontmatter.title,
+      type: 'image/jpeg',
+    }
+  })
 
+  return <>
+    <NextSeo
+      title={frontmatter.title}
+      description={frontmatter.summary}
+      openGraph={{
+        url: 'https:officialrajdeepsingh.dev',
+        title: frontmatter.title,
+        description: frontmatter.summary ,
+        type: 'article',
+        article: {
+          publishedTime: frontmatter.date,
+          authors: [
+            'https://officialrajdeepsingh.dev/pages/about',
+          ],
+          tags: frontmatter.tags,
+        },
+        images: imageMeta,
+        site_name: 'Rajdeep Singh',
+      }}
+    />
+    <div className="container my-5">
+      <div className="row">
+        <div className="col-lg-10 m-auto">
+          <div className='card card-page'>
+            <a href={`/blog/${frontmatter.slug}`} > <img className="card-img-top" src={ImageUrl(frontmatter.image)} alt="..." /></a>
 
-  return (
-    <>
-     <NextSeo
-        title={frontmatter.title}
-        description={frontmatter.summary}
-        openGraph={{
-          url: 'https:officialrajdeepsingh.dev',
-          title: frontmatter.title,
-          description: frontmatter.summary ,
-          type: 'article',
-          article: {
-            publishedTime: frontmatter.date,
-            authors: [
-              'https://officialrajdeepsingh.dev/pages/about',
-            ],
-            tags: frontmatter.tags,
-          },
-          images: imageMeta,
-          site_name: 'Rajdeep Singh',
-        }}
-      />
-      <div className="container my-5">
-        <div className="row">
-          <div className="col-lg-10 m-auto">
-            <div className='card card-page'>
-              <a href={`/blog/${frontmatter.slug}`} > <img className="card-img-top" src={ImageUrl(frontmatter.image)} alt="..." /></a>
-
-              <h1 className='post-title mt-2 p-2'>{frontmatter.title}</h1>
-              <div className='post-date m-1 p-2'>
-                <div>
-                  <h6>{`${date.getMonth() + 1} - ${date.getDate()} - ${date.getFullYear()}`} </h6>
-                </div>
-                <div>
-                  {frontmatter.tags.map(tag => {
-                    const slug = slugify(tag)
-                    return <Link key={tag} href={`/tag/${slug}`}>
-                      <a className='btn'>
-                        <h6 className='post-title'>#{tag}</h6>
-                      </a>
-                    </Link>
-                  })}
-                </div>
+            <h1 className='post-title mt-2 p-2'>{frontmatter.title}</h1>
+            <div className='post-date m-1 p-2'>
+              <div>
+                <h6>{`${date.getMonth() + 1} - ${date.getDate()} - ${date.getFullYear()}`} </h6>
               </div>
-
-              <div className='post-body p-5 m-auto' dangerouslySetInnerHTML={{ __html: marked.parse(content) }}>
-
+              <div>
+                {frontmatter.tags.map(tag => {
+                  const slug = slugify(tag)
+                  return <Link key={tag} href={`/tag/${slug}`}>
+                    <a className='btn'>
+                      <h6 className='post-title'>#{tag}</h6>
+                    </a>
+                  </Link>
+                })}
               </div>
             </div>
+
+            <div
+              className='post-body p-5 m-auto'
+             dangerouslySetInnerHTML={{__html: marked.parse(content)}}
+            />
           </div>
         </div>
       </div>
-    </>
-  )
+    </div>
+  </>
 }
 
 
 export async function getStaticPaths() {
-  console.log("process.cwd():", fs.readdirSync(process.cwd()))
-  console.log("./content", fs.readdirSync(path.resolve("./content")))
-
-  //  Get files from the posts dir
-  const files = fs.readdirSync(path.resolve("content", "blog"))
-
-   // Get slug and frontmatter from posts
-  const temppaths = files.map((filename) => {
-
-    // Get frontmatter
-    const markdownWithMeta = fs.readFileSync(
-      path.join("content", "blog", filename),
-      'utf-8'
-    )
-
-    const { data: frontmatter } = matter(markdownWithMeta)
-
-    return {
-      params: {
-        slug: filename.replace('.md', ''),
-      },
-    }
-  })
-  //   remove null in tempPosts
-  const paths = temppaths.filter(
-    path => {
-      return path && path
-    }
-  )
+  // console.log("process.cwd():", fs.readdirSync(process.cwd()))
+  // console.log("./content", fs.readdirSync(path.resolve("./content")))
+  //
+  // //  Get files from the posts dir
+  // const files = fs.readdirSync(path.resolve("content", "blog"))
+  //
+  //  // Get slug and frontmatter from posts
+  // const temppaths = files.map((filename) => {
+  //
+  //   // Get frontmatter
+  //   const markdownWithMeta = fs.readFileSync(
+  //     path.join("content", "blog", filename),
+  //     'utf-8'
+  //   )
+  //
+  //   const { data: frontmatter } = matter(markdownWithMeta)
+  //
+  //   return {
+  //     params: {
+  //       slug: filename.replace('.md', ''),
+  //     },
+  //   }
+  // })
+  // //   remove null in tempPosts
+  // const paths = temppaths.filter(
+  //   path => {
+  //     return path && path
+  //   }
+  // )
 
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: "blocking", // false,
   }
-
 }
 
 
