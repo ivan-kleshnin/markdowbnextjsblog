@@ -88,7 +88,7 @@ export async function getStaticProps({params}) {
   console.log("process.cwd():", fs.readdirSync(process.cwd()))
   console.log("./", fs.readdirSync(path.resolve("./")))
 
-  const post = readFM(path.resolve("content", "blog", slug + ".md"))
+  const post = readFM(path.resolve("content2", "blog", slug + ".md"))
 
   return {
     props: {
@@ -111,14 +111,14 @@ function readFM(file) {
 //   // console.log("./content", fs.readdirSync(path.resolve("./content")))
 //   //
 //   // //  Get files from the posts dir
-//   // const files = fs.readdirSync(path.resolve("content", "blog"))
+//   // const files = fs.readdirSync(path.resolve("content2", "blog"))
 //   //
 //   //  // Get slug and frontmatter from posts
 //   // const temppaths = files.map((filename) => {
 //   //
 //   //   // Get frontmatter
 //   //   const markdownWithMeta = fs.readFileSync(
-//   //     path.join("content", "blog", filename),
+//   //     path.join("content2", "blog", filename),
 //   //     "utf-8"
 //   //   )
 //   //

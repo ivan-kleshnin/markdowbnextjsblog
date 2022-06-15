@@ -55,7 +55,7 @@ export default function Home({ posts }) {
 //   console.log("LS ./", fs.readdirSync(path.resolve("./")))
 //
 //   // Get files from the posts dir
-//   const files = await fs.readdirSync(path.resolve("content", "blog"))
+//   const files = await fs.readdirSync(path.resolve("content2", "blog"))
 //
 //   console.log('files:', files)
 //
@@ -66,7 +66,7 @@ export default function Home({ posts }) {
 //
 //     // Get frontmatter
 //     const markdownWithMeta = fs.readFileSync(
-//       path.resolve("content", "blog", filename),
+//       path.resolve("content2", "blog", filename),
 //       'utf-8'
 //     )
 //
