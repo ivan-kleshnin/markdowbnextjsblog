@@ -83,14 +83,14 @@ export async function getStaticPaths() {
   console.log("./content", fs.readdirSync(path.resolve("./content")))
 
   //  Get files from the posts dir
-  const files = fs.readdirSync(path.resolve("content", "posts"))
+  const files = fs.readdirSync(path.resolve("content", "blog"))
 
    // Get slug and frontmatter from posts
   const temppaths = files.map((filename) => {
 
     // Get frontmatter
     const markdownWithMeta = fs.readFileSync(
-      path.join("content", "posts", filename),
+      path.join("content", "blog", filename),
       'utf-8'
     )
 
@@ -118,13 +118,9 @@ export async function getStaticPaths() {
 
 
 export async function getStaticProps({ params: { slug } }) {
-
-  const markdownWithMeta = fs.readFileSync(
-    path.join("content", "posts", slug + ".md"),
-    'utf-8'
-  )
-
-  const { data: frontmatter, content } = matter(markdownWithMeta)
+  const markdownWithMeta = fs.readFileSync(path.join("content", "blog", slug + ".md"), 'utf-8')
+  console.log("markdownWithMeta:", markdownWithMeta)
+  const {data: frontmatter, content} = matter(markdownWithMeta)
 
   return {
     props: {

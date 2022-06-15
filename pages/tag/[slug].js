@@ -7,75 +7,56 @@ import ItemPost from '../../components/ItemPost'
 import { slugify, ImageUrl } from '../../utils'
 import { NextSeo } from 'next-seo';
 
-export default function tag({ posts }) {
+export default function tag({posts}) {
+  return <>
+    <NextSeo
+      title= 'Access your tag realted articles'
+      description= 'Access your tag realted articles'
+      openGraph={{
+        url: 'https://officialrajdeepsingh.dev',
+        title: 'Access your tag realted articles',
+        description: 'Access your tag realted articles',
 
-  return (
-    <>
-   <NextSeo
-     title= 'Access your tag realted articles'
-     description= 'Access your tag realted articles'
-        openGraph={{
-          url: 'https://officialrajdeepsingh.dev',
-          title: 'Access your tag realted articles',
-          description: 'Access your tag realted articles',
+        images: [
+          {
+            url: `${ImageUrl('banner.png')}`,
+            width: 1224,
+            height: 724,
+            alt: 'banner',
+            type: 'image/jpeg',
+          },
+        ],
+        site_name: 'Rajdeep Singh',
+      }}
+    />
 
-          images: [
-            {
-              url: `${ImageUrl('banner.png')}`,
-              width: 1224,
-              height: 724,
-              alt: 'banner',
-              type: 'image/jpeg',
-            },
-          ],
-          site_name: 'Rajdeep Singh',
-        }}
-      />
-
-      <div className="container my-3">
-        <div className="row">
-
-          <div className="col-lg-10 post-date m-1 p-2m-auto">
-
-            {
-              posts.map((post, index) => {
-
-                return <ItemPost key={index} post={post} />
-              }
-              )
-
-            }
-
-
-          </div>
-
-
+    <div className="container my-3">
+      <div className="row">
+        <div className="col-lg-10 post-date m-1 p-2m-auto">
+          {posts.map((post, index) =>
+            <ItemPost key={index} post={post}/>
+          )}
         </div>
       </div>
-    </>
-  )
-
-
-
-
-
+    </div>
+  </>
 }
 
 
 export async function getStaticPaths() {
-  const files = fs.readdirSync(path.resolve("content", "posts"))
+  const files = fs.readdirSync(path.resolve("content", "blog"))
 
   let tempStorage = []
 
   const temppaths = files.map((filename) => {
     const markdownWithMeta = fs.readFileSync(
-      path.resolve("content", "posts", filename),
+      path.resolve("content", "blog", filename),
       'utf-8'
     )
 
-    const {data: frontmatter} = matter(markdownWithMeta)
+    const {data} = matter(markdownWithMeta)
 
-    frontmatter.tags.map(tag => {
+    data.tags.map(tag => {
       tempStorage.push({params: {slug: slugify(tag)}})
     })
   })
@@ -97,7 +78,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { slug } }) {
 
   // Get files from the posts dir
-  const files = fs.readdirSync(path.resolve("content", "posts"))
+  const files = fs.readdirSync(path.resolve("content", "blog"))
 
   let tempStorage = []
 
@@ -109,7 +90,7 @@ export async function getStaticProps({ params: { slug } }) {
 
     // Get frontmatter
     const markdownWithMeta = fs.readFileSync(
-      path.resolve("content", "posts", filename),
+      path.resolve("content", "blog", filename),
       'utf-8'
     )
 

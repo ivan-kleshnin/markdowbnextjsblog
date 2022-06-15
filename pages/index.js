@@ -51,7 +51,7 @@ export default function Home({ posts }) {
 
 export async function getStaticProps() {
   // Get files from the posts dir
-  const files = await fs.readdirSync(path.resolve("content", "posts"))
+  const files = await fs.readdirSync(path.resolve("content", "blog"))
 
   console.log('files:', files)
 
@@ -62,7 +62,7 @@ export async function getStaticProps() {
 
     // Get frontmatter
     const markdownWithMeta = fs.readFileSync(
-      path.resolve("content", "posts", filename),
+      path.resolve("content", "blog", filename),
       'utf-8'
     )
 

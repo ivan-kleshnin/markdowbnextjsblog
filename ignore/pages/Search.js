@@ -23,9 +23,8 @@ export default function Search() {
     //   remove null in posts
     const posts = TempPosts.filter(Boolean)
 
-    return (
-        <div>
-           <NextSeo
+    return <div>
+      <NextSeo
         title="Search the page"
         description="Find the search result page"
         openGraph={{
@@ -44,26 +43,22 @@ export default function Search() {
           site_name: 'Rajdeep Singh',
         }}
       />
-            <Banner />
-            <div className="container">
-                <div className="row">
-
-                    <div className="col-lg-8 m-auto">
-
-                        {
-                            posts.length > 0 ?
-                                posts.map((post, index) => (
-                                    <Post key={index} post={post} />
-                                )) : <div className='m-auto p-5 mx-5 '>
-                                    <h2 className='text-center'>
-                                       {   query.q? `No post find base on ${query.q} `: 'loadding.. '}
-                                    </h2>
-                                </div>
-                        }
-
-                    </div>
-                </div>
-            </div>
+      <Banner />
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-8 m-auto">
+            {
+              posts.length > 0 ?
+                posts.map((post, index) => (
+                  <Post key={index} post={post} />
+                )) : <div className='m-auto p-5 mx-5 '>
+                  <h2 className='text-center'>
+                     {query.q? `No post find base on ${query.q} `: 'loadding.. '}
+                  </h2>
+              </div>
+            }
+          </div>
         </div>
-    )
+      </div>
+  </div>
 }
