@@ -63,46 +63,29 @@ export default function tag({ posts }) {
 
 
 export async function getStaticPaths() {
-  const files = fs.readdirSync(path.join("content", "posts"))
+  const files = fs.readdirSync(path.resolve("content", "posts"))
 
   let tempStorage = []
 
   const temppaths = files.map((filename) => {
-
     const markdownWithMeta = fs.readFileSync(
-      path.join("content", "posts", filename),
+      path.resolve("content", "posts", filename),
       'utf-8'
     )
 
-    const { data: frontmatter } = matter(markdownWithMeta)
+    const {data: frontmatter} = matter(markdownWithMeta)
 
-    if (frontmatter.draft === false) {
-      frontmatter.tags.map(
-        tag => {
-          let slug = slugify(tag)
-          tempStorage.push({ params: { slug } });
-
-        }
-      )
-    } else {
-      return null
-    }
-
-
+    frontmatter.tags.map(tag => {
+      tempStorage.push({params: {slug: slugify(tag)}})
+    })
   })
-
-
-
 
   const paths = tempStorage.filter((item,
     index) => {
     return tempStorage.indexOf(item) === index
   })
 
-
-
   // const paths=["npm"]
-
 
   return {
     paths,
@@ -114,7 +97,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { slug } }) {
 
   // Get files from the posts dir
-  const files = fs.readdirSync(path.join("content", "posts"))
+  const files = fs.readdirSync(path.resolve("content", "posts"))
 
   let tempStorage = []
 
@@ -126,29 +109,21 @@ export async function getStaticProps({ params: { slug } }) {
 
     // Get frontmatter
     const markdownWithMeta = fs.readFileSync(
-      path.join("content", "posts", filename),
+      path.resolve("content", "posts", filename),
       'utf-8'
     )
 
     const { data: frontmatter } = matter(markdownWithMeta)
 
-
-
-    if (frontmatter.draft === false) {
-      frontmatter.tags.map(
-        tag => {
-          let tagSlug = slugify(tag)
-          if (slug === tagSlug) {
-            tempStorage.push({ post: frontmatter })
-          }
+    frontmatter.tags.map(
+      tag => {
+        let tagSlug = slugify(tag)
+        if (slug === tagSlug) {
+          tempStorage.push({ post: frontmatter })
         }
-      )
-    } else {
-      return null
-    }
+      }
+    )
   })
-
-
 
   //  remove null in tempPosts
 

@@ -1,7 +1,7 @@
 import SITE_URL from "../config";
 
 export function sortByDate(a, b) {
-  return new Date(b.frontmatter.date) - new Date(a.frontmatter.date)
+  return new Date(b.date) - new Date(a.date)
 }
 
 export function slugify(title) {
@@ -9,7 +9,7 @@ export function slugify(title) {
 }
 
 export function ImageUrl(url) {
-  
+
   return SITE_URL + url
-  
+
 }

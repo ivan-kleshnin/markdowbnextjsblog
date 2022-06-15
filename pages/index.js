@@ -1,4 +1,3 @@
-
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -9,8 +8,6 @@ import Sidebar from "../components/Sidebar"
 import { sortByDate, slugify,ImageUrl} from '../utils'
 
 export default function Home({ posts }) {
-
-
   return (
     <div>
       <NextSeo
@@ -32,21 +29,20 @@ export default function Home({ posts }) {
           site_name: 'Rajdeep Singh',
         }}
       />
-        <Banner />
+      <Banner />
       <div className="container">
         <div className="row">
-
           <div className="col-lg-8">
-
-            {posts.map((post, index) => (
-              <Post key={index} post={post} />
-            ))}
-
-
+            <pre>
+              <code>{JSON.stringify(posts, null, 2)}</code>
+            </pre>
+            {posts.map((post, i) => {
+              // console.log(post)
+              return null
+              // <Post key={i} post={post} />
+            })}
           </div>
-
           <Sidebar />
-
         </div>
       </div>
     </div>
@@ -55,11 +51,9 @@ export default function Home({ posts }) {
 
 export async function getStaticProps() {
   // Get files from the posts dir
-  const files = fs.readdirSync(path.join("content", "posts"))
+  const files = await fs.readdirSync(path.resolve("content", "posts"))
 
-
-
-
+  console.log('files:', files)
 
   // Get slug and frontmatter from posts
   const tempPosts = files.map((filename) => {
@@ -68,22 +62,16 @@ export async function getStaticProps() {
 
     // Get frontmatter
     const markdownWithMeta = fs.readFileSync(
-      path.join("content", "posts", filename),
+      path.resolve("content", "posts", filename),
       'utf-8'
     )
 
-    const { data: frontmatter } = matter(markdownWithMeta)
+    const {data} = matter(markdownWithMeta)
 
-
-    if (frontmatter.draft === false) {
-      return {
-        slug,
-        frontmatter,
-      }
-    } else {
-      return null
+    return {
+      slug,
+      ...data,
     }
-
   })
 
   //  remove null in tempPosts

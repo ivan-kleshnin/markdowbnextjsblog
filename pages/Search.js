@@ -11,23 +11,17 @@ export default function Search() {
     const TempPosts = []
 
     search.map(
-        (post) => {
-            if (post.frontmatter.draft === false) {
-                if (post.frontmatter.title.toLowerCase().includes(query.q) || post.frontmatter.summary.toLowerCase().includes(query.q) || post.frontmatter.description.toLowerCase().includes(query.q)) {
-                    TempPosts.push(post)
-                } else {
-                    TempPosts.push(null)
-                }
-            }
+      (post) => {
+        if (post.title.toLowerCase().includes(query.q) || post.summary.toLowerCase().includes(query.q) || post.description.toLowerCase().includes(query.q)) {
+          TempPosts.push(post)
+        } else {
+          TempPosts.push(null)
         }
+      }
     )
 
     //   remove null in posts
-    const posts = TempPosts.filter(
-        path => {
-            return path && path
-        }
-    )
+    const posts = TempPosts.filter(Boolean)
 
     return (
         <div>

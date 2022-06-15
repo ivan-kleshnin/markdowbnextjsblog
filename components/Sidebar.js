@@ -31,23 +31,15 @@ export default function Sidebar() {
           <div className="row">
             <div className="col-sm-10">
               <ul className="list-unstyled mb-0">
-
-                {
-                  Search?.map(
-                    post => {
-                      return post.frontmatter.tags.map(
-                      item => {
-                        const slug = slugify(item)
-
-                        return <Link key={item} href={`/category/${slug}`}>
-                          <a> <li> {item} </li></a>
-                        </Link>
-                      }
-                    )
-
-                }
-                  )
-                }
+                {Search?.map(post => {
+                  return null
+                  // return post.tags.map(item => {
+                  //   const slug = slugify(item)
+                  //   return <Link key={item} href={`/category/${slug}`}>
+                  //     <a> <li> {item} </li></a>
+                  //   </Link>
+                  // })
+                })}
               </ul>
             </div>
 

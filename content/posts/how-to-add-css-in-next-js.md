@@ -4,11 +4,9 @@ date : "2020-11-10T11:42:46Z"
 description : "Easy Ways Add CSS in Next.js #SeriesPart2"
 image : "images/next.js-add-css-code.jpg"
 images : ["images/next.js-add-css-code.jpg"]
-slug : "how-to-add-css-in-next-js"
 summary : "Easy Ways Add CSS in Next.js #SeriesPart2 \n"
 tags : ["Next.js", "Next", "Next.js Framework", "Next.js Tutorial", "React.js", "react.js tutorial"]
 title : "How To Add CSS In Next js?"
-draft : false
 ---
 
 In this Next Series, we Learn How to add CSS's own Project with Easy Steps.

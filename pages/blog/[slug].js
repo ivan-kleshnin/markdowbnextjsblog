@@ -79,8 +79,11 @@ export default function PostPage({ content, frontmatter }) {
 
 
 export async function getStaticPaths() {
+  console.log("process.cwd():", fs.readdirSync(process.cwd()))
+  console.log("./content", fs.readdirSync(path.resolve("./content")))
+
   //  Get files from the posts dir
-  const files = fs.readdirSync(path.join("content", "posts"))
+  const files = fs.readdirSync(path.resolve("content", "posts"))
 
    // Get slug and frontmatter from posts
   const temppaths = files.map((filename) => {
@@ -93,17 +96,11 @@ export async function getStaticPaths() {
 
     const { data: frontmatter } = matter(markdownWithMeta)
 
-    if (frontmatter.draft === false) {
-      return {
-        params: {
-          slug: filename.replace('.md', ''),
-        },
-      }
-    } else {
-      return null
+    return {
+      params: {
+        slug: filename.replace('.md', ''),
+      },
     }
-
-
   })
   //   remove null in tempPosts
   const paths = temppaths.filter(

@@ -2,10 +2,8 @@
 author : "Rajdeep Singh"
 date : "2020-12-28T14:09:38Z"
 description : "Mark tag Help to High Lighting text in HTML 5"
-draft : false
 image : "images/Text-Highlighting-In-HTML-5.png"
 images : ["images/Text-Highlighting-In-HTML-5.png"]
-slug : "text-highlighting-in-html-5"
 summary : "Mark tag Help to High Lighting text in HTML 5 "
 tags : ["html", "html 5", "html tutorial", "Text Highlighting", "text highlighting in html", "html for beginner"]
 title : "Text Highlighting In HTML 5?"

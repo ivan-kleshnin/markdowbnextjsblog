@@ -2,10 +2,8 @@
 author : "Rajdeep Singh"
 date : "2020-12-24T11:13:05Z"
 description : "HTML History Very Complicated. But I Try To Explain Very Easy Way."
-draft : false
 image : "images/HTML-Version-History.jpg"
 images : ["images/HTML-Version-History.jpg"]
-slug : "html-version-history"
 summary : "HTML History Very Complicated. But I Try To Explain Very Easy Way."
 tags : ["html", "html 5", "HTML History", "Html Version", "Who Create Html"]
 title : "HTML Version History?"
