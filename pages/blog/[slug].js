@@ -88,7 +88,11 @@ export async function getStaticProps({params}) {
   console.log("process.cwd():", fs.readdirSync(process.cwd()))
   console.log("./", fs.readdirSync(path.resolve("./")))
 
-  const post = readFM(path.resolve("content2", "blog", slug + ".md"))
+  const post = readFM(path.resolve("content", "blog", slug + ".md"))
+  console.log(post)
+
+  const post2 = readFM(path.resolve("content2", "blog", slug + ".md"))
+  console.log(post2)
 
   return {
     props: {
