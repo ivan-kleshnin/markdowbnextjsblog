@@ -94,6 +94,8 @@ export async function getStaticProps({params}) {
   const post2 = readFM(path.resolve("content2", "blog", slug + ".md"))
   console.log(post2)
 
+  const _x = path.resolve("content3", "blog", slug + ".md")
+
   return {
     props: {
       post,
