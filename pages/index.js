@@ -30,9 +30,9 @@ export default function Home({ posts }) {
             },
           ],
           site_name: 'Rajdeep Singh',
-        }}      
+        }}
       />
-        <Banner /> 
+        <Banner />
       <div className="container">
         <div className="row">
 
@@ -46,7 +46,7 @@ export default function Home({ posts }) {
           </div>
 
           <Sidebar />
-          
+
         </div>
       </div>
     </div>
@@ -55,11 +55,11 @@ export default function Home({ posts }) {
 
 export async function getStaticProps() {
   // Get files from the posts dir
-  const files = fs.readdirSync(path.join('posts'))
+  const files = fs.readdirSync(path.join("content", "posts"))
 
- 
 
-  
+
+
 
   // Get slug and frontmatter from posts
   const tempPosts = files.map((filename) => {
@@ -68,7 +68,7 @@ export async function getStaticProps() {
 
     // Get frontmatter
     const markdownWithMeta = fs.readFileSync(
-      path.join('posts', filename),
+      path.join("content", "posts", filename),
       'utf-8'
     )
 
@@ -86,7 +86,7 @@ export async function getStaticProps() {
 
   })
 
-  //  remove null in tempPosts 
+  //  remove null in tempPosts
   const posts = tempPosts.filter(
     post => {
       return post && post
@@ -111,4 +111,4 @@ export async function getStaticProps() {
 }
 
 
- 
+

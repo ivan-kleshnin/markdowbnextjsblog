@@ -9,9 +9,6 @@ import { NextSeo } from 'next-seo';
 
 export default function tag({ posts }) {
 
-
-
-
   return (
     <>
    <NextSeo
@@ -66,14 +63,14 @@ export default function tag({ posts }) {
 
 
 export async function getStaticPaths() {
-  const files = fs.readdirSync(path.join('posts'))
+  const files = fs.readdirSync(path.join("content", "posts"))
 
   let tempStorage = []
 
   const temppaths = files.map((filename) => {
 
     const markdownWithMeta = fs.readFileSync(
-      path.join('posts', filename),
+      path.join("content", "posts", filename),
       'utf-8'
     )
 
@@ -117,7 +114,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { slug } }) {
 
   // Get files from the posts dir
-  const files = fs.readdirSync(path.join('posts'))
+  const files = fs.readdirSync(path.join("content", "posts"))
 
   let tempStorage = []
 
@@ -129,7 +126,7 @@ export async function getStaticProps({ params: { slug } }) {
 
     // Get frontmatter
     const markdownWithMeta = fs.readFileSync(
-      path.join('posts', filename),
+      path.join("content", "posts", filename),
       'utf-8'
     )
 
@@ -153,7 +150,7 @@ export async function getStaticProps({ params: { slug } }) {
 
 
 
-  //  remove null in tempPosts 
+  //  remove null in tempPosts
 
   const posts = tempStorage.filter(
     post => {

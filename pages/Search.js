@@ -3,12 +3,12 @@ import Post from '../components/Post'
 import Banner from "../components/Banner";
 import search from "../search.json";
 import { useRouter } from 'next/router'
-import { NextSeo } from 'next-seo';
+import { NextSeo } from 'next-seo'
 import { ImageUrl} from '../utils'
 
 export default function Search() {
     const { query } = useRouter()
-    const TempPosts = [] 
+    const TempPosts = []
 
     search.map(
         (post) => {
@@ -22,7 +22,7 @@ export default function Search() {
         }
     )
 
-    //   remove null in posts 
+    //   remove null in posts
     const posts = TempPosts.filter(
         path => {
             return path && path
@@ -48,7 +48,7 @@ export default function Search() {
             },
           ],
           site_name: 'Rajdeep Singh',
-        }}      
+        }}
       />
             <Banner />
             <div className="container">
@@ -64,7 +64,7 @@ export default function Search() {
                                     <h2 className='text-center'>
                                        {   query.q? `No post find base on ${query.q} `: 'loadding.. '}
                                     </h2>
-                                </div> 
+                                </div>
                         }
 
                     </div>

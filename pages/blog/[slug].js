@@ -21,11 +21,11 @@ export default function PostPage({ content, frontmatter }) {
      }
     )
 
-   
+
   return (
     <>
      <NextSeo
-        title={frontmatter.title} 
+        title={frontmatter.title}
         description={frontmatter.summary}
         openGraph={{
           url: 'https:officialrajdeepsingh.dev',
@@ -41,7 +41,7 @@ export default function PostPage({ content, frontmatter }) {
           },
           images: imageMeta,
           site_name: 'Rajdeep Singh',
-        }}      
+        }}
       />
       <div className="container my-5">
         <div className="row">
@@ -51,24 +51,19 @@ export default function PostPage({ content, frontmatter }) {
 
               <h1 className='post-title mt-2 p-2'>{frontmatter.title}</h1>
               <div className='post-date m-1 p-2'>
-
-                <div><h6>{`${date.getMonth() + 1} - ${date.getDate()} - ${date.getFullYear()}`} </h6>  </div>
-                <div> {
-                  frontmatter.categories.map(
-                    category => {
-
-                      const slug = slugify(category)
-
-                      return (<Link key={category} href={`/category/${slug}`}>
-                        <a className='btn'>
-                          <h6 className=' post-title'>#{category}</h6>
-                        </a>
-                      </Link>)
-                    }
-                  )
-                } </div>
-
-
+                <div>
+                  <h6>{`${date.getMonth() + 1} - ${date.getDate()} - ${date.getFullYear()}`} </h6>
+                </div>
+                <div>
+                  {frontmatter.tags.map(tag => {
+                    const slug = slugify(tag)
+                    return <Link key={tag} href={`/tag/${slug}`}>
+                      <a className='btn'>
+                        <h6 className='post-title'>#{tag}</h6>
+                      </a>
+                    </Link>
+                  })}
+                </div>
               </div>
 
               <div className='post-body p-5 m-auto' dangerouslySetInnerHTML={{ __html: marked.parse(content) }}>
@@ -85,14 +80,14 @@ export default function PostPage({ content, frontmatter }) {
 
 export async function getStaticPaths() {
   //  Get files from the posts dir
-  const files = fs.readdirSync(path.join('posts'))
+  const files = fs.readdirSync(path.join("content", "posts"))
 
    // Get slug and frontmatter from posts
   const temppaths = files.map((filename) => {
 
     // Get frontmatter
     const markdownWithMeta = fs.readFileSync(
-      path.join('posts', filename),
+      path.join("content", "posts", filename),
       'utf-8'
     )
 
@@ -110,7 +105,7 @@ export async function getStaticPaths() {
 
 
   })
-  //   remove null in tempPosts 
+  //   remove null in tempPosts
   const paths = temppaths.filter(
     path => {
       return path && path
@@ -128,7 +123,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { slug } }) {
 
   const markdownWithMeta = fs.readFileSync(
-    path.join('posts', slug + '.md'),
+    path.join("content", "posts", slug + ".md"),
     'utf-8'
   )
 
