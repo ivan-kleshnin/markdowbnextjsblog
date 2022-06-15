@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+// import fs from 'fs'
+// import path from 'path'
 import matter from 'gray-matter'
 import { NextSeo } from 'next-seo';
 import Post from '../components/Post'
