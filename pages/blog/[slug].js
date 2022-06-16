@@ -1,5 +1,5 @@
-// import fs from "fs"
-// import path from "path"
+import fs from "fs"
+import path from "path"
 import parseFM from "gray-matter"
 import { marked } from "marked"
 import Link from "next/link"
@@ -83,9 +83,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params}) {
-  const fs = await import("fs").then(m => m.default)
-  const path = await import("path").then(m => m.default)
-
   const {slug} = params
 
   console.log("process.cwd():", fs.readdirSync(process.cwd()))
